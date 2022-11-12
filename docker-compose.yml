@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  postgresdb:
+    container_name: postgresSQL
+    image: postgres:latest
+    restart: always
+    ports:
+       - "5432:5432"
+    volumes:
+       - /home/ubuntu/postgresSQL:/var/lib/mysql
+    environment:
+       - POSTGRES_PASSWORD=metaticketset
+       - POSTGRES_USER=metaticket
+       - POSTGRES_DB=metaticket
+   
+   redis:
+    container_name: redis
+    image: redis:latest
+    command: redis-server --requirepass metaticketset --detach redis redis-server
+    restart: always
+    ports:
+       - "6379:6379"    
+    volumes:
+      - /home/ubuntu/redis:/var/lib/redis
+
